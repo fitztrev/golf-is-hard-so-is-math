@@ -2,6 +2,8 @@
 
 Simple + quick golf scorecard calculator.
 
+https://fitztrev.github.io/golf-is-hard-so-is-math/
+
 ### About
 
 Uses Vue.js and Bulma to create a simple mobile web app.
