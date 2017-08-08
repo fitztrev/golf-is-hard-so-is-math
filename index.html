@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Golf is Hard. So is Math.</title>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.0/css/bulma.min.css">
+        <link rel="stylesheet" href="style.css">
+        <link rel="manifest" href="manifest.json">
+    </head>
+    <body>
+        <div id="app" v-cloak>
+
+            <section class="hero is-info is-bold">
+                <div class="hero-body">
+                    <div class="container">
+                        <h1 class="title is-4">
+                            Golf is Hard. So is Math.
+                        </h1>
+                        <h2 class="subtitle is-6">
+                            Simple + quick golf scorecard calculator.
+                        </h2>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section scorecard">
+                <table class="table is-fullwidth is-striped is-bordered is-narrow">
+                    <tbody>
+                        <tr>
+                            <th v-for="(score, hole) in holesFront" v-bind:class="{ 'holeHasFocus' : holeWithFocus == hole }" @click="holeWithFocus = hole">{{ hole }}</th>
+                            <th>Out</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td v-for="(score, hole) in holesFront" v-bind:class="{ 'holeHasFocus' : holeWithFocus == hole }" @click="holeWithFocus = hole">{{ score }}</td>
+                            <th>{{ scoreFront }}</th>
+                            <td></td>
+                        </tr>
+
+                        <tr>
+                            <th v-for="(score, hole) in holesBack" v-bind:class="{ 'holeHasFocus' : holeWithFocus == hole }" @click="holeWithFocus = hole">{{ hole }}</th>
+                            <th>In</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr>
+                            <td v-for="(score, hole) in holesBack" v-bind:class="{ 'holeHasFocus' : holeWithFocus == hole }" @click="holeWithFocus = hole">{{ score }}</td>
+                            <th>{{ scoreBack }}</th>
+                            <th>{{ scoreTotal }}</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="section numberpad">
+                <div class="columns is-mobile is-multiline">
+                    <div class="column is-one-third" v-for="num in 9">
+                        <button type="button"
+                            class="button is-large is-fullwidth is-success"
+                            @click="setHoleScore(num)"
+                            :disabled="holeWithFocus > 18"
+                        >{{ num }}</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <button type="button" class="button is-warning is-fullwidth" @click="clearScores">Reset</button>
+            </section>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.2/vue.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
+        <script src="script.js"></script>
+    </body>
+</html>

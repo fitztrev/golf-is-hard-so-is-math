@@ -1,0 +1,16 @@
+{
+  "short_name": "Golf Calculator",
+  "name": "Golf is Hard. So is Math.",
+  "theme_color": "#1577c6",
+  "background_color": "#1577c6",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
