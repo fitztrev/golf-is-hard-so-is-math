@@ -6,7 +6,7 @@ https://fitztrev.github.io/golf-is-hard-so-is-math/
 
 ### About
 
-Uses Vue.js and Bulma to create a simple mobile web app.
+Uses [Vue.js](https://vuejs.org/) and [Bulma](http://bulma.io/) to create a simple mobile web app.
 
 ### Installation
 
