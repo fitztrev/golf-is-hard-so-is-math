@@ -4,8 +4,8 @@
   "theme_color": "#1577c6",
   "background_color": "#1577c6",
   "display": "standalone",
-  "scope": "/",
-  "start_url": "/golf-is-hard-so-is-math/",
+  "scope": "/golf-is-hard-so-is-math/",
+  "start_url": "./",
   "icons": [
     {
       "src": "icon.png",
