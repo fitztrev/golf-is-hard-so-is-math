@@ -26,6 +26,7 @@
     }
 
 .numberpad {
+    padding-bottom: 0;
     padding-top: 0;
 }
 
@@ -33,6 +34,10 @@
         padding: 0.2rem;
     }
 
-    .button.is-success:active {
+    .numberpad .button {
+        font-size: 2.25rem;
+    }
+
+    .numberpad .button.is-success:active {
         background: #1577c6;
     }
