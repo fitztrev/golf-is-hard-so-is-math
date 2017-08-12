@@ -4,6 +4,12 @@ new Vue({
     data: {
         holes: {},
         holeWithFocus: 1,
+
+        numberpad: [
+            7, 8, 9,
+            4, 5, 6,
+            1, 2, 3,
+        ],
     },
 
     computed: {
@@ -57,5 +63,5 @@ new Vue({
 
             this.holeWithFocus = 1
         },
-    }
+    },
 })
