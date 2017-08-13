@@ -3,6 +3,7 @@ new Vue({
 
     data: {
         holes: {},
+
         holeWithFocus: 1,
 
         numberpad: [
@@ -10,6 +11,19 @@ new Vue({
             4, 5, 6,
             1, 2, 3,
         ],
+    },
+
+    mounted: function() {
+        // setup 18 holes with null scores to start
+        for (let i=1; i<=18; i++) {
+            this.$set(this.holes, i, null)
+        }
+
+        // accept keyboard input from desktop users
+        document.onkeypress = function (e) {
+            let pressed = _.toNumber(e.key)
+            pressed >= 0 && this.setHoleScore(pressed)
+        }.bind(this)
     },
 
     computed: {
@@ -36,17 +50,6 @@ new Vue({
         scoreTotal: function() {
             return this.scoreFront + this.scoreBack
         },
-    },
-
-    mounted: function() {
-        for (let i=1; i<=18; i++) {
-            this.$set(this.holes, i, null)
-        }
-
-        document.onkeypress = function (e) {
-            let pressed = _.toNumber(e.key)
-            pressed >= 0 && this.setHoleScore(pressed)
-        }.bind(this)
     },
 
     methods: {
