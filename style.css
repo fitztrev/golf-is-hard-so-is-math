@@ -38,6 +38,10 @@
         font-size: 2.25rem;
     }
 
+    .numberpad .button.reset {
+        font-size: 1.5rem;
+    }
+
     .numberpad .button.is-success:active {
         background: #1577c6;
     }
