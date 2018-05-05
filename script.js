@@ -14,16 +14,9 @@ new Vue({
     },
 
     mounted: function() {
-        // setup 18 holes with null scores to start
-        for (let i=1; i<=18; i++) {
-            this.$set(this.holes, i, null)
-        }
+        this.clearScores()
 
-        // accept keyboard input from desktop users
-        document.onkeypress = function (e) {
-            let pressed = _.toNumber(e.key)
-            pressed >= 0 && this.setHoleScore(pressed)
-        }.bind(this)
+        this.registerKeyboardListener()
     },
 
     computed: {
@@ -53,18 +46,26 @@ new Vue({
     },
 
     methods: {
+        clearScores: function() {
+            // set all 18 holes with null scores
+            for (let i=1; i<=18; i++) {
+                this.$set(this.holes, i, null)
+            }
+
+            this.holeWithFocus = 1
+        },
+
         setHoleScore: function(score) {
             if (this.holeWithFocus > 18) return
 
             this.holes[this.holeWithFocus++] = score
         },
 
-        clearScores: function() {
-            this.holes = _.mapValues(this.holes, function() {
-                return null
-            })
-
-            this.holeWithFocus = 1
-        },
+        registerKeyboardListener: function() {
+            document.onkeypress = function (e) {
+                let pressed = _.toNumber(e.key)
+                pressed >= 0 && this.setHoleScore(pressed)
+            }.bind(this)
+        }
     },
 })
