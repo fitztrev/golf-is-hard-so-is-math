@@ -1,71 +1,67 @@
 new Vue({
     el: '#app',
 
-    data: {
-        holes: {},
+    //https://vuejs.org/v2/guide/components.html#data-Must-Be-a-Function
+    data() {
+        return {
+            holes: Array.from({length: 18}, null),
+            holeWithFocus: 0,
 
-        holeWithFocus: 1,
-
-        numberpad: [
-            7, 8, 9,
-            4, 5, 6,
-            1, 2, 3,
-        ],
+            numberpad: [
+                7, 8, 9,
+                4, 5, 6,
+                1, 2, 3,
+            ],
+        }
     },
 
-    mounted: function() {
-        this.clearScores()
-
+    mounted() {
         this.registerKeyboardListener()
     },
 
     computed: {
-        holesFront: function() {
-            return _.pickBy(this.holes, function(score, hole) {
-                return hole <= 9
-            })
+        holesFront() {
+            return this.holes.slice(0, 8)
         },
 
-        holesBack: function() {
-            return _.pickBy(this.holes, function(score, hole) {
-                return hole >= 10
-            })
+        holesBack() {
+            return this.holes.slice(9)
         },
 
-        scoreFront: function() {
-            return _.sum(_.values(this.holesFront))
+        scoreFront() {
+            return this.holesFront.reduce((total, score) => total + score, 0)
         },
 
-        scoreBack: function() {
-            return _.sum(_.values(this.holesBack))
+        scoreBack() {
+            return this.holesBack.reduce((total, score) => total + score, 0)
         },
 
-        scoreTotal: function() {
+        scoreTotal() {
             return this.scoreFront + this.scoreBack
         },
     },
 
     methods: {
-        clearScores: function() {
-            // set all 18 holes with null scores
-            for (let i=1; i<=18; i++) {
-                this.$set(this.holes, i, null)
-            }
-
-            this.holeWithFocus = 1
+        clearScores() {
+            this.holes = Array.from({length: 18}, null)
+            this.holeWithFocus = 0
         },
 
-        setHoleScore: function(score) {
-            if (this.holeWithFocus > 18) return
+        setHoleScore(score) {
+            if (this.holeWithFocus > 17) return
 
-            this.holes[this.holeWithFocus++] = score
+            this.holes[this.holeWithFocus] = score
+            this.holeWithFocus++
         },
 
-        registerKeyboardListener: function() {
-            document.onkeypress = function (e) {
-                let pressed = _.toNumber(e.key)
-                pressed >= 0 && this.setHoleScore(pressed)
-            }.bind(this)
+        registerKeyboardListener() {
+            // this seems a little wrong, we should probably scope this to this.$el.addEventListener
+            // but given I don't know your template I can't assume that
+            window.addEventListener("keypress", (e) => {
+                if(e.keyCode >= 48 && e.keyCode <= 57) {
+                    this.setHoleScore(pressed);
+                }
+            })
         }
     },
 })
